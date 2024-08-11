@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle 5: Calculate Carbon Footprint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Puzzle 5: Calculate Your Carbon Footprint</h1>
+    <p>Use the link below to calculate your carbon footprint:</p>
+    <a href="https://www.carbonfootprint.com/calculator.aspx" target="_blank">Calculate Carbon Footprint</a>
+    <p>After calculating, enter your carbon footprint below:</p>
+    <label for="carbonFootprint">What is your carbon footprint:</label>
+    <input type="text" id="carbonFootprint" name="carbonFootprint">
+    <button onclick="goToFinal()">Submit</button>
+
+    <script>
+        function goToFinal() {
+            const carbonFootprint = document.getElementById('carbonFootprint').value;
+            if (carbonFootprint) {
+                localStorage.setItem('carbonFootprint', carbonFootprint);
+                alert("Congratulations! You've solved all the puzzles. Now you'll get a secret box which will open with the secret key. Your secret code is 'h'.");
+                window.location.href = "{{ url_for('final') }}"; // Corrected path using Flask's url_for
+            } else {
+                alert('Please enter your carbon footprint');
+            }
+        }
+    </script>
+</body>
+</html>

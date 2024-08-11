@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Change Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Escape from the Room</h1>
+    <p>One locked box. Solve 5 puzzles to key of the secret Box. <br>
+        Keep in mind you'll get a secret code after each each once complete the puzzle correctly. <br>Note the code and then proceed further.</p>
+    <ul>
+        {% for puzzle in puzzles %}
+        <li><a href="{{ url_for('puzzle', puzzle_id=puzzle.id) }}">{{ puzzle.content }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('final') }}">Go to Final Challenge</a>
+</body>
+</html>

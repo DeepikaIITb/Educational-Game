@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle 3: Message on Global Warming</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .message-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+    <script>
+        function checkMessage() {
+            const userInput = document.getElementById('message').value.trim().toUpperCase();
+            const correctAnswer = "REDUCE YOUR CARBON FOOTPRINT";
+            const avatar = document.getElementById('avatar-img');
+            const messageElement = document.getElementById('feedback');
+
+            if (userInput === correctAnswer) {
+                messageElement.textContent = "Hope now you'll try to reduce your individual carbon footprint. Your secret code is 'et'.";
+                messageElement.className = "message correct";
+                messageElement.style.display = "block";
+                createBalloonBurst();
+                document.getElementById("nextPuzzleBtn").style.display = "block";
+                avatar.src = "{{ url_for('static', filename='image/happy_avatar.png') }}";
+                document.getElementById('avatar-img').src = "{{ url_for('static', filename='image/happy_avatar.jpg') }}";
+            } else {
+                messageElement.textContent = "Some matches are incorrect. Try again.";
+                messageElement.className = "message incorrect";
+                messageElement.style.display = "block";
+                avatar.src = "{{ url_for('static', filename='image/sad_avatar.png') }}";
+                document.getElementById('avatar-img').src = "{{ url_for('static', filename='image/sad_avatar.jpg') }}";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Puzzle 3: Message on Global Warming</h1>
+    <p>Decode the following message from the image:</p>
+    <img src="{{ url_for('static', filename='image/decode.png') }}" alt="Message Image" class="message-image">
+    <p>Hint: The decoded message is a phrase related to reducing environmental impact.</p>
+    <input type="text" id="message" placeholder="Enter decoded message...">
+    <button onclick="checkMessage()">Check Message</button>
+    <a id="nextPuzzleBtn" href="{{ url_for('puzzle', puzzle_id=4) }}" style="display:none;">Next Puzzle</a>
+    <div id="feedback" class="message"></div>
+    <a href="{{ url_for('puzzle', puzzle_id=4) }}">Next Puzzle</a>
+    <button id="nextPuzzleBtn" style="display: none;" onclick="nextLevel()">Next Puzzle</button>
+    
+    <div id="avatar">
+        <img id="avatar-img" src="{{ url_for('static', filename='image/default_avatar.png') }}" alt="Avatar">
+    </div>
+</body>
+</html>

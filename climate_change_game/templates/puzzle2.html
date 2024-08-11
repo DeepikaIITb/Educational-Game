@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle 2: Match Renewable Energy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .message {
+            display: none;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            animation: burst 1s forwards;
+        }
+        @keyframes burst {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+    <script>
+        function checkMatch() {
+            const matches = {
+                "Wind turbine converts Wind Energy into: ": "Electrical Energy",
+                "Green plants converts Solar Energy into: ": "Chemical Energy",
+                "Radio converts Electrical Energy into: ": "Sound Energy",
+                "Fan converts Electrical Energy into: ": "Mechanical Energy",
+                "Dams convert Kinetic Energy into: ": "Electrical Energy",
+                "Cars convert Chemical Energy into: ": "Mechanical Energy"
+            };
+            let correct = true;
+            document.querySelectorAll('.matching-item').forEach(item => {
+                const energy = item.querySelector('p').textContent;
+                const selected = item.querySelector('select').value;
+                if (matches[energy] !== selected) {
+                    correct = false;
+                }
+            });
+            const messageElement = document.getElementById('message');
+            const avatar = document.getElementById('avatar-img');
+            if (correct) {
+                messageElement.textContent = "Hurray! You've learnt about the energy conversions. Your secret code is 'aa'.";
+                messageElement.className = "message correct";
+                messageElement.style.display = "block";
+                createBalloonBurst();
+                document.getElementById("nextPuzzleBtn").style.display = "block";
+                avatar.src = "{{ url_for('static', filename='image/happy_avatar.png') }}";
+                document.getElementById('avatar-img').src = "{{ url_for('static', filename='image/happy_avatar.jpg') }}";
+            } else {
+                messageElement.textContent = "Some matches are incorrect. Try again.";
+                messageElement.className = "message incorrect";
+                messageElement.style.display = "block";
+                avatar.src = "{{ url_for('static', filename='image/sad_avatar.png') }}";
+                document.getElementById('avatar-img').src = "{{ url_for('static', filename='image/sad_avatar.jpg') }}";
+            }
+        }
+
+        function createBalloonBurst() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            document.body.appendChild(balloon);
+            setTimeout(() => {
+                balloon.remove();
+            }, 1000);
+        }
+
+        function nextLevel() {
+            window.location.href = "{{ url_for('puzzle', puzzle_id=3) }}";
+        }
+    </script>
+</head>
+<body>
+    <h1>Puzzle 2: Find the match for Energy conversions</h1>
+    <h2>Find energy which is created by its resource.</h2>
+    <div class="matching-game">
+        <div class="matching-item">
+            <p>Wind turbine converts Wind Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+        <div class="matching-item">
+            <p>Green plants converts Solar Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+        <div class="matching-item">
+            <p>Radio converts Electrical Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+        <div class="matching-item">
+            <p>Fan converts Electrical Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+        <div class="matching-item">
+            <p>Dams convert Kinetic Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+        <div class="matching-item">
+            <p>Cars convert Chemical Energy into: </p>
+            <select>
+                <option value="Choose any one option">Choose any one option</option>
+                <option value="Electrical Energy">Electrical Energy</option>
+                <option value="Chemical Energy">Chemical Energy</option>
+                <option value="Sound Energy">Sound Energy</option>
+                <option value="Mechanical Energy">Mechanical Energy</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+    </div>
+    <button onclick="checkMatch()">Check Match</button>
+    <div id="message" class="message"></div>
+    <a href="{{ url_for('puzzle', puzzle_id=3) }}">Next Puzzle</a>
+    <button id="nextPuzzleBtn" style="display: none;" onclick="nextLevel()">Next Puzzle</button>
+    <div id="avatar">
+        <img id="avatar-img" src="{{ url_for('static', filename='image/default_avatar.png') }}" alt="Avatar">
+    </div>
+</body>
+</html>

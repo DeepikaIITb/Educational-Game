@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #2196F3;
+}
+
+.container {
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #000;
+    background-color: #fff;
+    width: 80%;
+}
+
+.background {
+    width: 100%;
+    height: 400px;
+    background-color: #e0e0e0;
+    position: relative;
+}
+
+.draggable {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    cursor: move;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#cat { background-image: url('{{ url_for('static', filename='image/cat.jpg') }}'); }
+#trees { background-image: url('{{ url_for('static', filename='image/tree.jpg') }}'); }
+#ocean { background-image: url('{{ url_for('static', filename='image/ocean.jpg') }}'); }
+#sun { background-image: url('{{ url_for('static', filename='image/sun.jpg') }}'); }
+#plants { background-image: url('{{ url_for('static', filename='image/plant.jpg') }}'); }
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.placeholder {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #4CAF50;
+    position: absolute;
+}
+.cat-placeholder { left: 50px; top: 50px; }
+.tree-placeholder { left: 200px; top: 50px; }
+.ocean-placeholder { left: 350px; top: 50px; }
+.sun-placeholder { left: 500px; top: 50px; }
+.plant-placeholder { left: 650px; top: 50px; }
+
+#avatar {
+    margin-top: 20px;
+}
+
+#avatar img {
+    width: 100px;
+    height: 100px;
+}

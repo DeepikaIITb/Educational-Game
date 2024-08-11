@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Step: Enter Secret Code</title>
+    <link rel="stylesheet" href="static/css/style.css"> <!-- Corrected path -->
+    <style>
+        .message {
+            display: none;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .big-bravo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function checkSecretCode() {
+            const secretCode = document.getElementById('secretCode').value;
+            const messageElement = document.getElementById('message');
+            if (secretCode === "Save Earth") {
+                messageElement.innerHTML = "Congratulations! You've completed the game and earned 5 coins!<br><span class='big-bravo'>Bravo!</span>";
+                messageElement.className = "message success";
+                messageElement.style.display = "block";
+            } else {
+                messageElement.textContent = "Incorrect secret code. Please try again.";
+                messageElement.className = "message error";
+                messageElement.style.display = "block";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carbonFootprint = localStorage.getItem('carbonFootprint');
+            document.getElementById('carbonFootprintDisplay').textContent = carbonFootprint;
+        });
+    </script>
+</head>
+<body>
+    <h1>Final Step: Enter Secret Code</h1>
+    <p>Your carbon footprint is: <span id="carbonFootprintDisplay"></span></p>
+    <p>Enter the secret code you have collected from all the levels:</p>
+    <input type="text" id="secretCode" name="secretCode">
+    <button onclick="checkSecretCode()">Submit</button>
+    <div id="message" class="message"></div>
+</body>
+</html>
